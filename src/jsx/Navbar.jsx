@@ -20,7 +20,7 @@ function Navbar() {
             <nav className="navbar-container">
                     {/* 네비게이션 항목 */}
                     <div className="navbarNav" id="navbarNav">
-                        <ul className="navbar-nav">
+                        <ul className="navbar-nav"> 
                             <li className="nav-item">
                                 <a className="nav-link" href="#">
                                     <img src={category} alt="category" className="nav-icon" />

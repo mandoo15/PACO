@@ -1,0 +1,36 @@
+.pop-container {
+    max-width: 430px;
+    width: 100%;
+}
+
+.pop-up-header h1 {
+    text-align: left; /* 왼쪽 정렬 */
+    margin-left: 10px; /* 살짝 여백 추가 */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.pop-up-text h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    color: #5F6368;
+    margin-bottom: 50px;
+}
+
+
+.skip-container {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+
+

@@ -1,0 +1,55 @@
+
+.find-pw-container{
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.find-pw-container h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+
+.find-pw-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+#loginbutton {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#loginbutton:hover {
+    background-color: #0056b3;
+}
+
+/* 아이디/비밀번호 찾기 링크 스타일 */
+.find-container {
+    margin-top: 10px;
+}
+
+.find-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.find-container a:hover {
+    text-decoration: underline;
+}
