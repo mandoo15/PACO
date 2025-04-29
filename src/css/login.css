@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 제목 스타일 */
+.login-container h1 {
+    color: black;
+    margin-bottom: 50px;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 100%;
+    text-align: left;
+
+}
+
+/* 입력 필드 스타일 */
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.loginbutton {
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 90px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+
+/* 아이디/비밀번호 찾기 링크 스타일 */
+.find-container {
+    margin-top: 20px;
+
+}
+
+
+.find-container a {
+    color: #000; 
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.find-container a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,41 @@
+.nav {
+    max-width: 430px;
+    width: 100%;
+}
+
+.navbarNav {
+    display: flex;
+    justify-content: center;  /* 수평 중앙 정렬 */
+    align-items: center;      /* 수직 중앙 정렬 */
+    width: 100%;              /* 전체 너비를 차지하도록 설정 */
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;  /* 수평 중앙 정렬 */
+    align-items: center;      /* 수직 중앙 정렬 */
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.84);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+}
+
+.nav-item {
+    list-style-type: none;
+}
+
+.nav-link img {
+    width: 45px;
+    height: 45px;
+}
