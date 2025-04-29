@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/login_header.css';
 
-// img route
 import arrow_back from '../img/arrow_back.svg';
 
 function LoginHeader() {

@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../css/main.css";
 
-// 추가로 필요한 컴포넌트 import
 import Navbar from './Navbar.jsx';
 import Header from './header.jsx';
-
-
-import parkingSearchIcon from "../img/main/parking_search.svg";
-import parkingRouteIcon from "../img/main/parking_route.svg";
-import parkingHistoryIcon from "../img/main/parking_history.svg";
-import locationIcon from "../img/main/location.svg";
-import aiRecommendIcon from "../img/main/ai_recommend.svg";
-import userInfoIcon from "../img/main/user_info.svg";
 
 function Main() {
     const [username, setUsername] = useState("사용자");
     const [parkingLot, setParkingLot] = useState(null);
+    const scrollRef = useRef(null);
 
     useEffect(() => {
         const storedName = localStorage.getItem("username");
@@ -37,24 +29,92 @@ function Main() {
         fetchParkingData();
     }, []);
 
+    useEffect(() => {
+        const slider = scrollRef.current;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+      
+        const handleMouseDown = (e) => {
+          isDown = true;
+          slider.classList.add("dragging");
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        };
+      
+        const handleMouseLeave = () => {
+          isDown = false;
+          slider.classList.remove("dragging");
+        };
+      
+        const handleMouseUp = () => {
+          isDown = false;
+          slider.classList.remove("dragging");
+        };
+      
+        const handleMouseMove = (e) => {
+          if (!isDown) return;
+          e.preventDefault(); // 클릭 중일 때만 동작
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 1.5;
+          slider.scrollLeft = scrollLeft - walk;
+        };
+      
+        // 터치 대응
+        let startTouchX = 0;
+        let startScrollLeft = 0;
+      
+        const handleTouchStart = (e) => {
+          isDown = true;
+          startTouchX = e.touches[0].pageX;
+          startScrollLeft = slider.scrollLeft;
+        };
+      
+        const handleTouchMove = (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX;
+          const walk = (startTouchX - x);
+          slider.scrollLeft = startScrollLeft + walk;
+        };
+      
+        const handleTouchEnd = () => {
+          isDown = false;
+        };
+      
+        // 이벤트 바인딩
+        slider.addEventListener("mousedown", handleMouseDown);
+        slider.addEventListener("mouseleave", handleMouseLeave);
+        slider.addEventListener("mouseup", handleMouseUp);
+        slider.addEventListener("mousemove", handleMouseMove);
+      
+        slider.addEventListener("touchstart", handleTouchStart);
+        slider.addEventListener("touchmove", handleTouchMove);
+        slider.addEventListener("touchend", handleTouchEnd);
+      
+        return () => {
+          slider.removeEventListener("mousedown", handleMouseDown);
+          slider.removeEventListener("mouseleave", handleMouseLeave);
+          slider.removeEventListener("mouseup", handleMouseUp);
+          slider.removeEventListener("mousemove", handleMouseMove);
+          slider.removeEventListener("touchstart", handleTouchStart);
+          slider.removeEventListener("touchmove", handleTouchMove);
+          slider.removeEventListener("touchend", handleTouchEnd);
+        };
+      }, []);
+
     return (
         <div className="All" style={{ backgroundColor: "#efefef" }}>
             <div className="container" style={{ maxWidth: "430px", backgroundColor: "white", width: "100%" }}>
-                
-            
                 <div className="header">
                     <Header />
                 </div>
 
-             
                 <div className="content">
-                    {/* 사용자 이름과 추천 안내 */}
                     <div className="main-container-header">
                         <h1>{username}님, 안녕하세요!<br />
-                        선호도와 이력을 기반으로<br />추천된 주차공간입니다.</h1>
+                            선호도와 이력을 기반으로<br />추천된 주차공간입니다.</h1>
                     </div>
 
-                    {/* 추천 주차장 정보 */}
                     <div className="custom-container">
                         <div className="custom-container-info"></div>
                         <div className="custom-parking-lot">
@@ -70,79 +130,23 @@ function Main() {
                         </Link>
                     </div>
 
-    
             
-                    {/* 카테고리 메뉴 */}
                     <div className="main-category-container">
-                        <div className="category-grid">
-
-                            <div className="category-wrapper">
-                                <Link to="/home" className="category-item">
-                                    <img src={parkingSearchIcon} alt="주차장 검색" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">주차장 검색</h3>
-                            </div>
-
-                            <div className="category-wrapper">
-                                <Link to="/route" className="category-item">
-                                    <img src={parkingRouteIcon} alt="주차 경로 안내" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">주차경로 안내</h3>
-                            </div>
-
-                            <div className="category-wrapper">
-                                <Link to="/history" className="category-item">
-                                    <img src={parkingHistoryIcon} alt="주차 이력" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">주차 이력</h3>
-                            </div>
-
-                            <div className="category-wrapper">
-                                <Link to="/location" className="category-item">
-                                    <img src={locationIcon} alt="내 차량 위치" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">내 차량 위치</h3>
-                            </div>
-
-                            <div className="category-wrapper">
-                                <Link to="/recommend" className="category-item">
-                                    <img src={aiRecommendIcon} alt="AI 추천 받기" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">AI 추천 받기</h3>
-                            </div>
-
-                            <div className="category-wrapper">
-                                <Link to="/user_info_change" className="category-item">
-                                    <img src={userInfoIcon} alt="내 정보 수정" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">내 정보 수정</h3>
-                            </div>
-
-                        
-                            <div className="category-wrapper">
-                                <Link to="/parking-info" className="category-item">
-                                    <img src={parkingSearchIcon} alt="추가 예정" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">추가 예정</h3>
-                            </div>
-
-                      
-                            <div className="category-wrapper">
-                                <Link to="/parking-info" className="category-item">
-                                    <img src={parkingSearchIcon} alt="추가 예정" className="category-icon" />
-                                </Link>
-                                <h3 className="category-text">추가 예정</h3>
-                            </div>
-
+                        <div className="region-title">지역을 선택해 주세요</div>
+                        <div className="region-slide-js" ref={scrollRef}>
+                            {["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"].map((region, index) => (
+                                <div className="region-box-wrapper" key={index}>
+                                    <Link to={`/region/${region}`} className="region-box" />
+                                    <div className="region-label">{region}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-        
                 <div className="nav">
                     <Navbar />
                 </div>
-
             </div>
         </div>
     );

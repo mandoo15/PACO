@@ -1,4 +1,4 @@
-
+/* 기존 유지 */
 .main-container {
     max-width: 430px;
     width: 100%;
@@ -16,16 +16,16 @@
     margin-bottom: 50px;
 }
 
-
-.custom-container{
+/* 주차장 카드 */
+.custom-container {
     background-color: #E4EDF8;
     border-top: solid 4px #2C91FF;
     border-bottom: solid 4px #2C91FF;
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
-.custom-parking-lot h2{
+.custom-parking-lot h2 {
     text-align: left;
     margin-left: 10px;
     font-family: 'Inter';
@@ -35,7 +35,7 @@
     line-height: 100%;
 }
 
-.custom-parking-lot-info h3{
+.custom-parking-lot-info h3 {
     text-align: left;
     margin-left: 10px;
     font-family: 'Inter';
@@ -44,70 +44,65 @@
     font-size: 26px;
     line-height: 100%;
 }
+
 #detail-button {
-    position: absolute; /* 부모 요소(.custom-container)의 하단에 붙이기 */
-    bottom: -20px; /* 버튼을 border-bottom과 겹치게 설정 */
-    left: 50%;
-    transform: translateX(50%); /* 버튼을 중앙 정렬 */
+    position: absolute;
+    bottom: -20px;
+    left: 60%;
     padding: 10px 20px;
-    border: 3px solid #2C91FF; /* 테두리 색상을 컨테이너와 맞춤 */
-    background-color: white; /* 버튼 배경 흰색 */
-    color: #2C91FF;
+    border: none;
+    background-color: #99caff;
+    color: black;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    box-shadow: inset 0px 1px 4px rgba(12, 12, 13, 0.05);
 }
 
-#detail-button:hover {
-    background-color: #2C91FF;
-    color: white;
-}
 
-.main-category-container {
-    margin: 20px auto;
-    padding: 10px;
-    max-width: 600px;
-    text-align: center;
-}
 
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4개씩 한 줄 */
-    gap: 15px;
-    justify-content: center;
-}
+.region-title {
 
-.category-wrapper {
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #A4C8F2;
+    color: black;
+    border-radius: 15px;
+    padding: 6px 12px;
+    display: inline-block;
+    margin: 20px 0px 10px 10px;
+  }
+  
+  .region-slide-js {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    padding: 0 10px 10px;
+    cursor: grab;
+  }
+  
+  .region-box-wrapper {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.category-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    background: #E4EDF8;
-    border-radius: 10px;
-    width: 50px; 
-    height: 50px;
-    transition: background 0.3s;
-}
-
-.category-item:hover {
-    background: #d9d9d9;
-}
-
-.category-icon {
-    width: 60px;
-    height: 60px;
-}
-
-.category-text {
-    font-size: 12px;
-    text-align: center;
+  }
+  
+  .region-box {
+    width: 55px;
+    height: 55px;
+    background-color: #E4EDF8;
+    border-radius: 15px;
+    border: none;
+  }
+  
+  .region-label {
+    font-size: 13px;
     margin-top: 5px;
     color: #333;
-}
+    white-space: nowrap;
+  }
+  .region-slide-js.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }

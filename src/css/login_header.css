@@ -37,7 +37,7 @@
     font-weight: 500;
     font-size: 60px;
     line-height: 100%;
-    margin-bottom: ;
+    margin-bottom: 10%;
 }
 
 .login-logo h2{
@@ -47,7 +47,7 @@
     font-size: 20px;
     line-height: 100%;
     color: #555; 
-
+    text-align: center;
 }
 
 
