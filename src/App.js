@@ -8,6 +8,7 @@ import PopUp from './jsx/popup';
 import Main from './jsx/main'; 
 import ParkingRoute from './jsx/route';
 import LoginLayout from './jsx/LoginLayout'; 
+import MyPage from "./jsx/mypage"; 
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Popup" element={<PopUp />} />
             <Route path="/Main" element={<Main />} />
             <Route path="/route" element={<ParkingRoute />} /> 
+            <Route path="/mypage" element={<MyPage />} />
           </Routes>
         </div>
 
