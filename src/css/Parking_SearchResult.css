@@ -1,0 +1,76 @@
+
+/* 주차장 검색 결과 카드 */
+.parking-result {
+    width: 350px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+/* 주차장 이름 */
+.parking-name {
+    width: 320px;
+    height: 40px;
+    background: #E4EDF8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    align-items: center; 
+}
+/* 주차장 사진 */
+.parking-photo {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 15px 0; 
+}
+
+.parking-photo img {
+    width: 340px;
+    height: 170px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto; 
+}
+
+/* 거리 정보 */
+.parking-distance {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #666;
+    text-align: right; 
+    margin-left: auto; 
+    display: block; 
+}
+
+/* 주차장 정보 */
+.parking-info {
+    text-align: left;
+    background: #F3F3F3;
+    border-radius: 10px;
+}
+
+.remaining-seats h3 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+}
+.remaining-seats h4{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 100%;
+text-align: center;
+}

@@ -1,0 +1,53 @@
+.login-header {
+    max-width: 430px;
+    width: 100%;
+    position: relative;
+}
+
+.login-header-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.login-header-top-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-header-top img {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    padding: 0;
+    position: absolute;  
+    top: 10px;  
+    left: 10px; 
+}
+
+.login-logo h1 {
+    width: 100%;
+    margin: 0 30px 0 0;
+    padding: 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 100%;
+    margin-bottom: 10%;
+}
+
+.login-logo h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: #555; 
+    text-align: center;
+}
+
+
