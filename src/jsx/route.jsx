@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "../css/route.css";
-import changeIcon from "../img/route/change.svg"; 
-import departureIcon from "../img/route/route_depart.svg"; 
-import arrivalIcon from "../img/route/route_arrival.svg"; 
+import changeIcon from "../img/route/change.svg";
+import departureIcon from "../img/route/route_depart.svg";
+import arrivalIcon from "../img/route/route_arrival.svg";
 
 function ParkingRoute() {
+    const { regionName } = useParams(); // 주소에서 지역명 추출
     const [departure, setDeparture] = useState("");
     const [arrival, setArrival] = useState("");
     const [parkingLots, setParkingLots] = useState([]);
@@ -18,17 +20,16 @@ function ParkingRoute() {
         const interval = setInterval(() => {
             if (window.kakao && window.kakao.maps && window.kakao.maps.load) {
                 clearInterval(interval);
-
                 window.kakao.maps.load(() => {
-                    initMap(); 
+                    initMap();
                     getCurrentLocation();
-                    fetchParkingData();
+                    fetchParkingData(); // 주차장 데이터 불러오기
                 });
             }
         }, 300);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [regionName]);
 
     const initMap = () => {
         const container = document.getElementById('map');
@@ -43,53 +44,77 @@ function ParkingRoute() {
 
     const getCurrentLocation = () => {
         if (!navigator.geolocation) {
-          alert('브라우저가 GPS를 지원하지 않습니다.');
-          return;
+            alert('브라우저가 GPS를 지원하지 않습니다.');
+            return;
         }
-      
+
         navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-      
-            console.log("현재 위치:", latitude, longitude);
-      
-            const geocoder = new window.kakao.maps.services.Geocoder();
-      
-            geocoder.coord2Address(longitude, latitude, (result, status) => {
-              if (status === window.kakao.maps.services.Status.OK) {
-                const roadAddress = result[0].road_address?.address_name || result[0].address.address_name;
-                setDeparture(roadAddress); // 출발지에 도로명 주소 입력
-              } else {
-                setDeparture(`${latitude},${longitude}`); // 실패하면 위도,경도 fallback
-              }
-            });
-      
-            const mapContainer = document.getElementById('map');
-            const mapOption = {
-              center: new window.kakao.maps.LatLng(latitude, longitude),
-              level: 3
-            };
-            const map = new window.kakao.maps.Map(mapContainer, mapOption);
-      
-            new window.kakao.maps.Marker({
-              map: map,
-              position: new window.kakao.maps.LatLng(latitude, longitude)
-            });
-          },
-          () => {
-            alert('GPS 위치 정보를 가져올 수 없습니다.');
-          }
+            (position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                const geocoder = new window.kakao.maps.services.Geocoder();
+                geocoder.coord2Address(longitude, latitude, (result, status) => {
+                    if (status === window.kakao.maps.services.Status.OK) {
+                        const roadAddress = result[0].road_address?.address_name || result[0].address.address_name;
+                        setDeparture(roadAddress);
+                    } else {
+                        setDeparture(`${latitude},${longitude}`);
+                    }
+                });
+
+                const mapContainer = document.getElementById('map');
+                const map = new window.kakao.maps.Map(mapContainer, {
+                    center: new window.kakao.maps.LatLng(latitude, longitude),
+                    level: 3
+                });
+
+                new window.kakao.maps.Marker({
+                    map: map,
+                    position: new window.kakao.maps.LatLng(latitude, longitude)
+                });
+            },
+            () => {
+                alert('GPS 위치 정보를 가져올 수 없습니다.');
+            }
         );
-      };
+    };
 
-      
+    const fetchParkingData = async () => {
+        const apiRegion = regionName || "seoul"; // 기본값 seoul
+        const url = `https://testing-ne5w.onrender.com/parking_info/${apiRegion}`;
 
-    const fetchParkingData = () => {
-        fetch("http://localhost:8080/api/parking-lots")
-            .then(res => res.json())
-            .then(data => setParkingLots(data))
-            .catch(err => console.error("주차장 정보 불러오기 실패:", err));
+        try {
+            const response = await fetch(url);
+            const jsonData = await response.json();
+
+            const geocoder = new window.kakao.maps.services.Geocoder();
+
+            const withCoordinates = await Promise.all(
+                jsonData.map((item, index) => {
+                    return new Promise((resolve) => {
+                        geocoder.addressSearch(item.addr, (result, status) => {
+                            if (status === window.kakao.maps.services.Status.OK) {
+                                resolve({
+                                    id: index,
+                                    name: item.stationName || "이름 없음",
+                                    address: item.addr,
+                                    available: item.totalParkingSpaces ?? "-",
+                                    latitude: parseFloat(result[0].y),
+                                    longitude: parseFloat(result[0].x)
+                                });
+                            } else {
+                                resolve(null);
+                            }
+                        });
+                    });
+                })
+            );
+
+            setParkingLots(withCoordinates.filter(Boolean));
+        } catch (err) {
+            console.error("주차장 정보 불러오기 실패:", err);
+        }
     };
 
     useEffect(() => {
@@ -106,6 +131,8 @@ function ParkingRoute() {
             new window.kakao.maps.Size(36, 36)
         );
 
+        let currentlyOpenInfoWindow = null; // 변수를 선언
+
         parkingLots.forEach((lot) => {
             const pos = new window.kakao.maps.LatLng(lot.latitude, lot.longitude);
 
@@ -120,9 +147,14 @@ function ParkingRoute() {
             });
 
             window.kakao.maps.event.addListener(marker, 'click', () => {
-                infowindow.open(map, marker);
+                if (currentlyOpenInfoWindow) {
+                    currentlyOpenInfoWindow.close(); // 이전 창 닫기
+                }
+                infowindow.open(map, marker);       // 현재 창 열기
+                currentlyOpenInfoWindow = infowindow; // 현재 창
             });
         });
+
     }, [parkingLots]);
 
     const searchRoute = () => {
@@ -180,11 +212,11 @@ function ParkingRoute() {
                     <div className="input-fields">
                         <div className="route-input">
                             <img src={departureIcon} alt="출발지 아이콘" className="input-icon" />
-                            <input type="text" id="departure" value={departure} onChange={(e) => setDeparture(e.target.value)} placeholder="현재 위치" />
+                            <input type="text" value={departure} onChange={(e) => setDeparture(e.target.value)} placeholder="현재 위치" />
                         </div>
                         <div className="route-input">
                             <img src={arrivalIcon} alt="도착지 아이콘" className="input-icon" />
-                            <input type="text" id="arrival" value={arrival} onChange={(e) => setArrival(e.target.value)} placeholder="주차장" />
+                            <input type="text" value={arrival} onChange={(e) => setArrival(e.target.value)} placeholder="주차장" />
                         </div>
                     </div>
                 </div>

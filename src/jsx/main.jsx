@@ -134,9 +134,9 @@ function Main() {
                     <div className="main-category-container">
                         <div className="region-title">지역을 선택해 주세요</div>
                         <div className="region-slide-js" ref={scrollRef}>
-                            {["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"].map((region, index) => (
+                            {["서울", "광주", "대전", "인천", "부산", "대구", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"].map((region, index) => (
                                 <div className="region-box-wrapper" key={index}>
-                                    <Link to={`/region/${region}`} className="region-box" />
+                                    <Link to={`/region/${encodeURIComponent(region)}`} className="region-box" />
                                     <div className="region-label">{region}</div>
                                 </div>
                             ))}
