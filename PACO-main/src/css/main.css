@@ -1,0 +1,108 @@
+/* 기존 유지 */
+.main-container {
+    max-width: 430px;
+    width: 100%;
+}
+
+.main-container-header h1 {
+    text-align: left;
+    margin-left: 10px; 
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 주차장 카드 */
+.custom-container {
+    background-color: #E4EDF8;
+    border-top: solid 4px #2C91FF;
+    border-bottom: solid 4px #2C91FF;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.custom-parking-lot h2 {
+    text-align: left;
+    margin-left: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 100%;
+}
+
+.custom-parking-lot-info h3 {
+    text-align: left;
+    margin-left: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 100%;
+}
+
+#detail-button {
+    position: absolute;
+    bottom: -20px;
+    left: 60%;
+    padding: 10px 20px;
+    border: none;
+    background-color: #99caff;
+    color: black;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: inset 0px 1px 4px rgba(12, 12, 13, 0.05);
+}
+
+
+
+.region-title {
+
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #A4C8F2;
+    color: black;
+    border-radius: 15px;
+    padding: 6px 12px;
+    display: inline-block;
+    margin: 20px 0px 10px 10px;
+  }
+  
+  .region-slide-js {
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    padding: 0 10px 10px;
+    cursor: grab;
+  }
+  
+  .region-box-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .region-box {
+    width: 55px;
+    height: 55px;
+    background-color: #E4EDF8;
+    border-radius: 15px;
+    border: none;
+  }
+  
+  .region-label {
+    font-size: 13px;
+    margin-top: 5px;
+    color: #333;
+    white-space: nowrap;
+  }
+  .region-slide-js.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
