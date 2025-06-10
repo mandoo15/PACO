@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+🎓 졸업 프로젝트 소개
+프로젝트명: 스마트 주차 안내 및 시뮬레이션 시스템
+목표: 사용자의 현재 위치와 도로명 주소 기반으로 주변 공영 주차장의 실시간 정보를 지도에 시각화하고, 선택 시 상세 정보 및 경로 안내 기능을 제공하는 웹 서비스 개발
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🔧 주요 기능
+카카오맵 연동: 지도 위에 전국 주차장 위치 마커 표시
 
-## Available Scripts
+위치 기반 탐색: GPS로 현재 위치를 받아 지도 중심 설정
 
-In the project directory, you can run:
+주차장 데이터 표시: 주차 가능 수, 운영시간, 요금 등 상세 정보 출력
 
-### `npm start`
+경로 안내: 선택한 주차장까지의 거리 및 경로 버튼 제공
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+검색 및 필터링: 특정 지역(서울, 대전 등) 기반 주차장 조회
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+프론트/백엔드 통신: 외부 API 또는 백엔드 서버에서 주차장 JSON 데이터 받아오기
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🛠 사용 기술 스택
+파트	기술
+프론트엔드	React,  Kakao Maps API
+백엔드 Spring Boot
+지도 서비스	카카오 지도 API
